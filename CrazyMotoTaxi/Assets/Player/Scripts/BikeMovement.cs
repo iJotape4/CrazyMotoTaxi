@@ -1,4 +1,5 @@
 using UnityEngine;
+using MyBox;
 
 public class BikeMovement : MonoBehaviour
 {
@@ -6,6 +7,14 @@ public class BikeMovement : MonoBehaviour
     [SerializeField, Range(-10f, -0.01f)] float reverseMaxVelocity = -1f;
     Vector2 inputMovement;
     Rigidbody rb;
+
+    [Header ( "Steer ")]
+    [SerializeField, MustBeAssigned] Transform steer;
+    public float maxSteerAngle = 30.0f, currentSteerAngle =0f;
+
+    [Header("Body")]
+    [SerializeField, MustBeAssigned] Transform body;
+    float maxBodyInclination = 30f, currentBodyInclination =0f;
 
     private void Awake()
     {
@@ -27,6 +36,12 @@ public class BikeMovement : MonoBehaviour
             Decelerate();
 
         transform.position += transform.forward * currentSpeed * Time.deltaTime;
+
+        if (inputMovement.x != 0f)
+            Turn();
+        else
+            TurnInverse();
+
     }
 
     public void Accelerate()
@@ -49,5 +64,43 @@ public class BikeMovement : MonoBehaviour
     public void Decelerate(float brakesForce =1f)
     {
         currentSpeed = Mathf.MoveTowards(currentSpeed, 0, decelerationSpeed *brakesForce * Time.deltaTime);
+    }
+
+    public void Turn()
+    {
+        if(currentSpeed < 1)
+        {
+            ReturnBodyToTheirOriginalPos();
+            currentSteerAngle += inputMovement.x * Time.deltaTime*30f;
+            currentSteerAngle = Mathf.Clamp(currentSteerAngle, -maxSteerAngle, maxSteerAngle);
+            steer.localRotation = Quaternion.Euler(steer.localRotation.x, currentSteerAngle, steer.localRotation.z);
+        }
+        else
+        {
+            ReturnSteerToTheirOriginalPos();
+            currentBodyInclination += inputMovement.x * Time.deltaTime * 50f;
+            currentBodyInclination = Mathf.Clamp(currentBodyInclination, -maxBodyInclination, maxBodyInclination);
+            body.localRotation = Quaternion.Euler(body.rotation.x, body.rotation.y, -currentBodyInclination);
+        }
+    }
+
+    public void ReturnSteerToTheirOriginalPos()
+    {
+        float steerSpeed = 100f; // Adjust this value to control the speed of returning to the original rotation
+        currentSteerAngle = Mathf.MoveTowards(currentSteerAngle, 0, steerSpeed * Time.deltaTime);
+        steer.localRotation = Quaternion.Euler(steer.localRotation.x, currentSteerAngle, steer.localRotation.z);      
+    }
+
+    public void ReturnBodyToTheirOriginalPos()
+    {
+        float inclinationSpeed = 100f; // Adjust this value to control the speed of returning to the original rotation
+        currentBodyInclination = Mathf.MoveTowards(currentBodyInclination, 0, inclinationSpeed * Time.deltaTime);
+        body.localRotation = Quaternion.Euler(body.rotation.x, body.rotation.y, -currentBodyInclination);
+    }
+
+    public void TurnInverse()
+    {
+        ReturnSteerToTheirOriginalPos();
+        ReturnBodyToTheirOriginalPos();
     }
 }

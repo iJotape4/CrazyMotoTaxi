@@ -1,7 +1,7 @@
 
 using UnityEngine;
 
-[RequireComponent(typeof(BikeMovement))]
+//[RequireComponent(typeof(BikeMovement))]
 public class InputManager : MonoBehaviour
 {
     PlayerInput inputMap;

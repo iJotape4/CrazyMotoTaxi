@@ -42,8 +42,6 @@ public class MyBikeControll1 : MonoBehaviour
     [System.Serializable]
     public class BikeSetting
     {
-
-
         public bool showNormalGizmos = false;
 
         public List<Transform> cameraSwitchView;
@@ -77,8 +75,6 @@ public class MyBikeControll1 : MonoBehaviour
 
         public float stiffness = 1.0f;
 
-
-
         public bool automaticGear = true;
 
         public float[] gears = { -10f, 9f, 6f, 4.5f, 3f, 2.5f };
@@ -95,10 +91,6 @@ public class MyBikeControll1 : MonoBehaviour
     public bool grounded = true;
 
     private float MotorRotation;
-
-    [HideInInspector]
-    public bool crash;
-
 
     [HideInInspector]
     public float steer = 0; 
@@ -339,16 +331,11 @@ public class MyBikeControll1 : MonoBehaviour
     void Update()
     {     
         steer2 = Mathf.LerpAngle(steer2, steer * -bikeSetting.maxSteerAngle, Time.deltaTime * 10.0f);
-
         MotorRotation = Mathf.LerpAngle(MotorRotation, steer2 * bikeSetting.maxTurn * (Mathf.Clamp(speed / Z_Rotation, 0.0f, 1.0f)), Time.deltaTime * 5.0f);
-
         if (bikeSetting.bikeSteer)
             bikeSetting.bikeSteer.localRotation = SteerRotation * Quaternion.Euler(0, wheels[0].collider.steerAngle, 0); // this is 90 degrees around y axis
 
 
-
-        if (!crash)
-        {
             flipRotate = (transform.eulerAngles.z > 90 && transform.eulerAngles.z < 270) ? 180.0f : 0.0f;
 
             Wheelie = Mathf.Clamp(Wheelie, 0, bikeSetting.maxWheelie);
@@ -369,14 +356,6 @@ public class MyBikeControll1 : MonoBehaviour
 
             myRigidbody.MoveRotation(myRigidbody.rotation * deltaRotation2);
             bikeSetting.MainBody.localRotation = deltaRotation1;
-
-        }
-        else
-        {
-
-            bikeSetting.MainBody.localRotation = Quaternion.identity;
-            Wheelie = 0;
-        }
     }
 
     void FixedUpdate()
@@ -553,18 +532,6 @@ public class MyBikeControll1 : MonoBehaviour
 
                 floorContact = floorContact || (w.drive);
 
-
-                if (!crash)
-                {
-
-                    myRigidbody.angularDrag = 10.0f;
-                }
-                else
-                {
-                    myRigidbody.angularDrag = 0.0f;
-
-                }
-
                 grounded = true;
 
                 if (w.collider.GetComponent<WheelSkidmarks>())
@@ -663,19 +630,5 @@ public class MyBikeControll1 : MonoBehaviour
 //        Pitch = Mathf.Clamp(1.2f + ((motorRPM - bikeSetting.idleRPM) / (bikeSetting.shiftUpRPM - bikeSetting.idleRPM)), 1.0f, 10.0f);
 
         shiftTime = Mathf.MoveTowards(shiftTime, 0.0f, 0.1f);
-    }
-    void OnDrawGizmos()
-    {
-
-        if (!bikeSetting.showNormalGizmos || Application.isPlaying) return;
-
-        Matrix4x4 rotationMatrix = Matrix4x4.TRS(transform.position, transform.rotation, Vector3.one);
-
-        Gizmos.matrix = rotationMatrix;
-        Gizmos.color = new Color(1, 0, 0, 0.5f);
-
-        Gizmos.DrawCube(Vector3.up/1.6f, new Vector3(0.5f, 1.0f, 2.5f));
-        Gizmos.DrawSphere(bikeSetting.shiftCentre, 0.2f);
-
     }
 }

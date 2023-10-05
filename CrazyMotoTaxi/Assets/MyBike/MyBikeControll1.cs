@@ -116,9 +116,6 @@ public class MyBikeControll1 : MonoBehaviour
     [HideInInspector]
     public float powerShift = 100;
 
-    [HideInInspector]
-    public bool shift;
-
     private float flipRotate = 0.0f;
 
 
@@ -142,7 +139,6 @@ public class MyBikeControll1 : MonoBehaviour
 
     [HideInInspector]
     public float motorRPM = 0.0f;
-
 
 
     private float wantedRPM = 0.0f;
@@ -365,7 +361,6 @@ public class MyBikeControll1 : MonoBehaviour
         steer = Mathf.MoveTowards(steer, Input.GetAxis("Horizontal"), 0.1f);
         accel = Input.GetAxis("Vertical");
         brake = Input.GetButton("Jump");
-        shift = Input.GetKey(KeyCode.LeftShift) | Input.GetKey(KeyCode.RightShift);
 
         if (bikeSetting.automaticGear && (currentGear == 1) && (accel < 0.0f))
         {
@@ -494,27 +489,7 @@ public class MyBikeControll1 : MonoBehaviour
                 col.sidewaysFriction = fc; 
             }
 
-            if (shift && (currentGear > 1 && speed > 50.0f) && shifmotor)
-            {
-                shifting = true;
-                if (powerShift == 0) { shifmotor = false; }
-
-                powerShift = Mathf.MoveTowards(powerShift, 0.0f, Time.deltaTime * 10.0f);
-
-                curTorque = powerShift > 0 ? bikeSetting.shiftPower : bikeSetting.bikePower;
-            }
-            else
-            {
-                shifting = false;
-
-                if (powerShift > 20)
-                {
-                    shifmotor = true;
-                }
-
-                powerShift = Mathf.MoveTowards(powerShift, 100.0f, Time.deltaTime * 5.0f);
-                curTorque = bikeSetting.bikePower;
-            }
+           
 
 
             w.rotation = Mathf.Repeat(w.rotation + Time.deltaTime * col.rpm * 360.0f / 60.0f, 360.0f);
@@ -532,16 +507,12 @@ public class MyBikeControll1 : MonoBehaviour
 
                 floorContact = floorContact || (w.drive);
 
-                grounded = true;
-
                 if (w.collider.GetComponent<WheelSkidmarks>())
                 w.collider.GetComponent<WheelSkidmarks>().enabled = true;
 
             }
             else
             {
-                grounded = false;
-
                 if (w.collider.GetComponent<WheelSkidmarks>())
                 w.collider.GetComponent<WheelSkidmarks>().enabled = false;
 

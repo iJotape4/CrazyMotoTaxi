@@ -12,29 +12,21 @@ public class MyBikeControll1 : MonoBehaviour
         public WheelSetting setting;
     }
 
-
     [System.Serializable]
     public class ConnectWheel
     {
-
         public Transform wheelFront;
         public Transform wheelBack; 
-
         public Transform AxleFront; 
         public Transform AxleBack; 
-
     }
-
-
 
     [System.Serializable]
     public class WheelSetting
     {
-
         public float Radius = 0.3f;
         public float Weight = 1000.0f; 
         public float Distance = 0.2f;
-
     }
 
     public BikeSetting bikeSetting;
@@ -43,27 +35,17 @@ public class MyBikeControll1 : MonoBehaviour
     public class BikeSetting
     {
         public bool showNormalGizmos = false;
-
         public List<Transform> cameraSwitchView;
-
-
         public Transform MainBody;
         public Transform bikeSteer;
-
-
         public float maxWheelie = 40.0f;
         public float speedWheelie = 30.0f;
-
         public float slipBrake = 3.0f;
-
-
         public float springs = 35000.0f;
         public float dampers = 4000.0f;
-
         public float bikePower = 120;
         public float shiftPower = 150;
         public float brakePower = 8000;
-
         public Vector3 shiftCentre = new Vector3(0.0f, -0.6f, 0.0f); 
 
         public float maxSteerAngle = 30.0f; 
@@ -81,8 +63,6 @@ public class MyBikeControll1 : MonoBehaviour
 
         public float LimitBackwardSpeed = 60.0f;
         public float LimitForwardSpeed = 220.0f;
-
-
     }
 
     private Quaternion SteerRotation;
@@ -97,7 +77,6 @@ public class MyBikeControll1 : MonoBehaviour
     [HideInInspector]
     public bool brake;
     private float slip = 0.0f;
-
 
     [HideInInspector]
     public bool Backward = false;
@@ -122,16 +101,6 @@ public class MyBikeControll1 : MonoBehaviour
     [HideInInspector]
     public float speed = 0.0f;
 
-    float[] efficiencyTable = { 0.6f, 0.65f, 0.7f, 0.75f, 0.8f, 0.85f, 0.9f, 1.0f, 1.0f, 0.95f, 0.80f, 0.70f, 0.60f, 0.5f, 0.45f, 0.40f, 0.36f, 0.33f, 0.30f, 0.20f, 0.10f, 0.05f };
-
-    float efficiencyTableStep = 250.0f;
-
-
-    private float shiftDelay = 0.0f;
-
-    private float shiftTime = 0.0f;
-
-
     [HideInInspector]
     public int currentGear = 0;
     [HideInInspector]
@@ -139,7 +108,6 @@ public class MyBikeControll1 : MonoBehaviour
 
     [HideInInspector]
     public float motorRPM = 0.0f;
-
 
     private float wantedRPM = 0.0f;
     private float w_rotate;
@@ -162,7 +130,6 @@ public class MyBikeControll1 : MonoBehaviour
 
     private class WheelComponent
     {
-
         public Transform wheel;
         public Transform axle;
         public WheelCollider collider;
@@ -172,27 +139,18 @@ public class MyBikeControll1 : MonoBehaviour
         public bool drive;
         public float pos_y = 0.0f;
     }
-
-
-
     private WheelComponent SetWheelComponent(Transform wheel, Transform axle, bool drive, float maxSteer, float pos_y)
     {
-
         WheelComponent result = new WheelComponent();
         GameObject wheelCol = new GameObject(wheel.name + "WheelCollider");
-
-
 
         wheelCol.transform.parent = transform;
         wheelCol.transform.position = wheel.position;
         wheelCol.transform.eulerAngles = transform.eulerAngles;
         pos_y = wheelCol.transform.localPosition.y;
-
-
-       
+    
         wheelCol.AddComponent(typeof(WheelCollider));
-
-       
+      
         result.drive = drive;
         result.wheel = wheel;
         result.axle = axle;
@@ -200,14 +158,11 @@ public class MyBikeControll1 : MonoBehaviour
         result.pos_y = pos_y;
         result.maxSteer = maxSteer;
         result.startPos = axle.transform.localPosition;
-
         return result;
-
     }
 
     void Awake()
     {
-
         if (bikeSetting.automaticGear) NeutralGear = false;
 
         myRigidbody = transform.GetComponent<Rigidbody>();
@@ -221,11 +176,8 @@ public class MyBikeControll1 : MonoBehaviour
         wheels[0].collider.transform.localPosition = new Vector3(0, wheels[0].collider.transform.localPosition.y, wheels[0].collider.transform.localPosition.z);
         wheels[1].collider.transform.localPosition = new Vector3(0, wheels[1].collider.transform.localPosition.y, wheels[1].collider.transform.localPosition.z);
 
-
         foreach (WheelComponent w in wheels)
         {
-
-
             WheelCollider col = w.collider;
 
             col.suspensionDistance = bikeWheels.setting.Distance;
@@ -234,13 +186,8 @@ public class MyBikeControll1 : MonoBehaviour
             js.spring = bikeSetting.springs;
             js.damper = bikeSetting.dampers;
             col.suspensionSpring = js;
-
-
             col.radius = bikeWheels.setting.Radius;
-
-
             col.mass = bikeWheels.setting.Weight;
-
 
             WheelFrictionCurve fc = col.forwardFriction;
 
@@ -255,24 +202,13 @@ public class MyBikeControll1 : MonoBehaviour
             fc.asymptoteSlip = 0.5f;
             fc.stiffness = bikeSetting.stiffness;
             col.sidewaysFriction = fc;
-
         }
-
-
     }
-
-
 
     public void ShiftUp()
     {
-
-        float now = Time.timeSinceLevelLoad;
-
-        if (now < shiftDelay) return;
-
         if (currentGear < bikeSetting.gears.Length - 1)
         {
-
             if (!bikeSetting.automaticGear)
             {
                 if (currentGear == 0)
@@ -290,25 +226,15 @@ public class MyBikeControll1 : MonoBehaviour
             {
                 currentGear++;
             }
-
-
-               shiftDelay = now + 1.0f;
-               shiftTime = 1.0f;
         }
     }
 
     public void ShiftDown()
     {
-           float now = Time.timeSinceLevelLoad;
-
-           if (now < shiftDelay) return;
-
         if (currentGear > 0 || NeutralGear)
         {
-
             if (!bikeSetting.automaticGear)
             {
-
                 if (currentGear == 1)
                 {
                     if (!NeutralGear) { currentGear--; NeutralGear = true; }
@@ -319,8 +245,6 @@ public class MyBikeControll1 : MonoBehaviour
             {
                 currentGear--;
             }
-                shiftDelay = now + 0.1f;
-                shiftTime = 2.0f;
         }
     }
 
@@ -331,11 +255,8 @@ public class MyBikeControll1 : MonoBehaviour
         if (bikeSetting.bikeSteer)
             bikeSetting.bikeSteer.localRotation = SteerRotation * Quaternion.Euler(0, wheels[0].collider.steerAngle, 0); // this is 90 degrees around y axis
 
-
             flipRotate = (transform.eulerAngles.z > 90 && transform.eulerAngles.z < 270) ? 180.0f : 0.0f;
-
             Wheelie = Mathf.Clamp(Wheelie, 0, bikeSetting.maxWheelie);
-
 
             if (shifting)
             {
@@ -348,7 +269,6 @@ public class MyBikeControll1 : MonoBehaviour
 
             deltaRotation1 = Quaternion.Euler(-Wheelie, 0, flipRotate - transform.localEulerAngles.z + (MotorRotation));
             deltaRotation2 = Quaternion.Euler(0, 0, flipRotate - transform.localEulerAngles.z);
-
 
             myRigidbody.MoveRotation(myRigidbody.rotation * deltaRotation2);
             bikeSetting.MainBody.localRotation = deltaRotation1;
@@ -489,27 +409,20 @@ public class MyBikeControll1 : MonoBehaviour
                 col.sidewaysFriction = fc; 
             }
 
-           
-
-
             w.rotation = Mathf.Repeat(w.rotation + Time.deltaTime * col.rpm * 360.0f / 60.0f, 360.0f);
             w.wheel.localRotation = Quaternion.Euler(w.rotation,0.0f, 0.0f);
 
             Vector3 lp = w.axle.localPosition;
 
-
             if (col.GetGroundHit(out hit) && (w == wheels[1] || (w == wheels[0] && Wheelie == 0)))
             {
-
                 lp.y -= Vector3.Dot(w.wheel.position - hit.point, transform.TransformDirection(0, 1, 0)) - (col.radius);
                 lp.y = Mathf.Clamp(lp.y, w.startPos.y - bikeWheels.setting.Distance, w.startPos.y + bikeWheels.setting.Distance);
-
 
                 floorContact = floorContact || (w.drive);
 
                 if (w.collider.GetComponent<WheelSkidmarks>())
                 w.collider.GetComponent<WheelSkidmarks>().enabled = true;
-
             }
             else
             {
@@ -520,19 +433,14 @@ public class MyBikeControll1 : MonoBehaviour
 
                 if (!wheels[0].collider.isGrounded && !wheels[1].collider.isGrounded)
                 {
-
                     myRigidbody.centerOfMass = new Vector3(0, 0.2f, 0);
                     myRigidbody.angularDrag = 1.0f;
 
                     myRigidbody.AddForce(0, -10000, 0);
                 }
-
             }
-
-
             currentWheel++;
             w.axle.localPosition = lp;
-
         }
 
         if (motorizedWheels > 1)
@@ -540,40 +448,27 @@ public class MyBikeControll1 : MonoBehaviour
             rpm = rpm / motorizedWheels;
         }
 
-
         motorRPM = 0.95f * motorRPM + 0.05f * Mathf.Abs(rpm * bikeSetting.gears[currentGear]);
         if (motorRPM > 5500.0f) motorRPM = 5200.0f;
 
-
-        int index = (int)(motorRPM / efficiencyTableStep);
-        if (index >= efficiencyTable.Length) index = efficiencyTable.Length - 1;
-        if (index < 0) index = 0;
-
-        float newTorque = curTorque * bikeSetting.gears[currentGear] * efficiencyTable[index];
-
+        float newTorque = curTorque * bikeSetting.gears[currentGear];
         foreach (WheelComponent w in wheels)
         {
             WheelCollider col = w.collider;
-
             if (w.drive)
             {
-
                 if (Mathf.Abs(col.rpm) > Mathf.Abs(wantedRPM))
                 {
-
                     col.motorTorque = 0;
                 }
                 else
-                {
-                    
+                {                 
                     float curTorqueCol = col.motorTorque;
-
                     if (!brake && accel != 0 && NeutralGear == false)
                     {
                         if ((speed < bikeSetting.LimitForwardSpeed && currentGear > 0) ||
                             (speed < bikeSetting.LimitBackwardSpeed && currentGear == 0))
                         {
-
                             col.motorTorque = curTorqueCol * 0.9f + newTorque * 1.0f;
                         }
                         else
@@ -581,25 +476,15 @@ public class MyBikeControll1 : MonoBehaviour
                             col.motorTorque = 0;
                             col.brakeTorque = 2000;
                         }
-
-
                     }
                     else
                     {
                         col.motorTorque = 0;
-
                     }
                 }
-
             }
-
             float SteerAngle = Mathf.Clamp((speed) / bikeSetting.maxSteerAngle, 1.0f, bikeSetting.maxSteerAngle);
             col.steerAngle = steer * (w.maxSteer / SteerAngle);
-
         }
-
-//        Pitch = Mathf.Clamp(1.2f + ((motorRPM - bikeSetting.idleRPM) / (bikeSetting.shiftUpRPM - bikeSetting.idleRPM)), 1.0f, 10.0f);
-
-        shiftTime = Mathf.MoveTowards(shiftTime, 0.0f, 0.1f);
     }
 }

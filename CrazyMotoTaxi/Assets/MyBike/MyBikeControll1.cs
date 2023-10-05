@@ -105,11 +105,6 @@ public class MyBikeControll1 : MonoBehaviour
     public int currentGear = 0;
     [HideInInspector]
     public bool NeutralGear = true;
-
-    [HideInInspector]
-    public float motorRPM = 0.0f;
-
-    private float wantedRPM = 0.0f;
     private float w_rotate;
 
     private Rigidbody myRigidbody;
@@ -294,12 +289,12 @@ public class MyBikeControll1 : MonoBehaviour
                 ShiftUp(); 
 
         }
-        else if (bikeSetting.automaticGear && (motorRPM > bikeSetting.shiftUpRPM) && (accel > 0.0f) && speed > 10.0f && !brake)
+        else if (bikeSetting.automaticGear && (accel > 0.0f) && speed > 10.0f && !brake)
         {
             ShiftUp(); 
 
         }
-        else if (bikeSetting.automaticGear && (motorRPM < bikeSetting.shiftDownRPM) && (currentGear > 1))
+        else if (bikeSetting.automaticGear && (currentGear > 1))
         {
             ShiftDown(); 
         }
@@ -316,8 +311,6 @@ public class MyBikeControll1 : MonoBehaviour
         {
             Backward = false;
         }
-
-        wantedRPM = (5500.0f * accel) * 0.1f + wantedRPM * 0.9f;
 
         float rpm = 0.0f;
         int motorizedWheels = 0;
@@ -378,30 +371,21 @@ public class MyBikeControll1 : MonoBehaviour
                         slip = Mathf.Lerp(slip, 1.0f, 0.02f);
                     }
 
-
-                    wantedRPM = 0.0f;
                     col.brakeTorque = bikeSetting.brakePower;
                     w.rotation = w_rotate;
-
                 }
             }
             else
             {
-
                 col.brakeTorque = accel == 0 ? col.brakeTorque = 3000 : col.brakeTorque = 0;
-
                 slip = Mathf.Lerp(slip, 1.0f, 0.02f);
-
                 w_rotate = w.rotation;
-
             }
 
             WheelFrictionCurve fc = col.forwardFriction;
 
-
             if (w == wheels[1])
             {
-
                 fc.stiffness = bikeSetting.stiffness / slip;
                 col.forwardFriction = fc;
                 fc = col.sidewaysFriction;
@@ -448,40 +432,30 @@ public class MyBikeControll1 : MonoBehaviour
             rpm = rpm / motorizedWheels;
         }
 
-        motorRPM = 0.95f * motorRPM + 0.05f * Mathf.Abs(rpm * bikeSetting.gears[currentGear]);
-        if (motorRPM > 5500.0f) motorRPM = 5200.0f;
-
         float newTorque = curTorque * bikeSetting.gears[currentGear];
         foreach (WheelComponent w in wheels)
         {
             WheelCollider col = w.collider;
             if (w.drive)
-            {
-                if (Mathf.Abs(col.rpm) > Mathf.Abs(wantedRPM))
+            {             
+                float curTorqueCol = col.motorTorque;
+                if (!brake && accel != 0 && NeutralGear == false)
                 {
-                    col.motorTorque = 0;
-                }
-                else
-                {                 
-                    float curTorqueCol = col.motorTorque;
-                    if (!brake && accel != 0 && NeutralGear == false)
+                    if ((speed < bikeSetting.LimitForwardSpeed && currentGear > 0) ||
+                        (speed < bikeSetting.LimitBackwardSpeed && currentGear == 0))
                     {
-                        if ((speed < bikeSetting.LimitForwardSpeed && currentGear > 0) ||
-                            (speed < bikeSetting.LimitBackwardSpeed && currentGear == 0))
-                        {
-                            col.motorTorque = curTorqueCol * 0.9f + newTorque * 1.0f;
-                        }
-                        else
-                        {
-                            col.motorTorque = 0;
-                            col.brakeTorque = 2000;
-                        }
+                        col.motorTorque = curTorqueCol * 0.9f + newTorque * 1.0f;
                     }
                     else
                     {
                         col.motorTorque = 0;
+                        col.brakeTorque = 2000;
                     }
                 }
+                else
+                {
+                    col.motorTorque = 0;
+                }               
             }
             float SteerAngle = Mathf.Clamp((speed) / bikeSetting.maxSteerAngle, 1.0f, bikeSetting.maxSteerAngle);
             col.steerAngle = steer * (w.maxSteer / SteerAngle);

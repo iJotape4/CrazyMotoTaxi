@@ -586,8 +586,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4964045922259436101}
   - component: {fileID: 4964045922259436098}
-  - component: {fileID: 8211733618139370724}
   - component: {fileID: 2216351645162460545}
+  - component: {fileID: 2289958891477275367}
   m_Layer: 0
   m_Name: MyMotorBikeTest
   m_TagString: Untagged
@@ -628,7 +628,7 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 64
   m_CollisionDetection: 0
---- !u!114 &8211733618139370724
+--- !u!114 &2216351645162460545
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -637,7 +637,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 4964045922259436126}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 473001ae7358fb144b109806e6acea38, type: 3}
+  m_Script: {fileID: 11500000, guid: 9bbd588136e0b734cafb7bff7ff79b74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2289958891477275367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4964045922259436126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 988a989a91890704f818914fbe780ffe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   bikeWheels:
@@ -694,18 +706,6 @@ MonoBehaviour:
   accelFwd: 0
   accelBack: 0
   steerAmount: 0
---- !u!114 &2216351645162460545
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4964045922259436126}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9bbd588136e0b734cafb7bff7ff79b74, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &4964045922271248025
 GameObject:
   m_ObjectHideFlags: 0

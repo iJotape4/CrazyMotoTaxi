@@ -1,23 +1,25 @@
-
 using UnityEngine;
 
-//[RequireComponent(typeof(BikeMovement))]
-public class InputManager : MonoBehaviour
+namespace Player
 {
-    PlayerInput inputMap;
-    PlayerInput.ActionMapActions playerControls;
-    MyBikeControll1 movement;
-
-    private void Awake()
+    [RequireComponent(typeof(BikeController))]
+    public class InputManager : MonoBehaviour
     {
-        movement = GetComponent<MyBikeControll1>();
+        PlayerInput inputMap;
+        PlayerInput.ActionMapActions playerControls;
+        BikeController movement;
 
-        inputMap = new PlayerInput();
-        playerControls = inputMap.ActionMap;
+        private void Awake()
+        {
+            movement = GetComponent<BikeController>();
 
-        playerControls.Move.performed += ctx => movement.DoMove(ctx.ReadValue<Vector2>());
+            inputMap = new PlayerInput();
+            playerControls = inputMap.ActionMap;
+
+            playerControls.Move.performed += ctx => movement.DoMove(ctx.ReadValue<Vector2>());
+        }
+
+        private void OnEnable() => inputMap.Enable();
+        private void OnDestroy() => inputMap.Disable();
     }
-
-    private void OnEnable() => inputMap.Enable();
-    private void OnDestroy() => inputMap.Disable();
 }

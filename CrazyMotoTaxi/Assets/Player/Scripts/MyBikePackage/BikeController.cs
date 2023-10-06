@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class MyBikeControll1 : MonoBehaviour
+namespace Player
+{
+    public class BikeController : MonoBehaviour
 {
     public BikeWheels bikeWheels;
 
@@ -490,4 +492,5 @@ public class MyBikeControll1 : MonoBehaviour
             Backward = false;
         }
     }
+}
 }

@@ -244,32 +244,33 @@ public class MyBikeControll1 : MonoBehaviour
     {     
         steer2 = Mathf.LerpAngle(steer2, steer * -bikeSetting.maxSteerAngle, Time.deltaTime * 10.0f);
         MotorRotation = Mathf.LerpAngle(MotorRotation, steer2 * bikeSetting.maxTurn * (Mathf.Clamp(speed / Z_Rotation, 0.0f, 1.0f)), Time.deltaTime * 5.0f);
-        if (bikeSetting.bikeSteer)
-            bikeSetting.bikeSteer.localRotation = SteerRotation * Quaternion.Euler(0, wheels[0].collider.steerAngle, 0); // this is 90 degrees around y axis
 
-            flipRotate = (transform.eulerAngles.z > 90 && transform.eulerAngles.z < 270) ? 180.0f : 0.0f;
-            Wheelie = Mathf.Clamp(Wheelie, 0, bikeSetting.maxWheelie);
+        flipRotate = (transform.eulerAngles.z > 90 && transform.eulerAngles.z < 270) ? 180.0f : 0.0f;
+        Wheelie = Mathf.Clamp(Wheelie, 0, bikeSetting.maxWheelie);
 
-            if (shifting)
-            {
-                Wheelie += bikeSetting.speedWheelie * Time.deltaTime / (speed / 50);
-            }
-            else
-            {
-                Wheelie = Mathf.MoveTowards(Wheelie, 0, (bikeSetting.speedWheelie * 2) * Time.deltaTime * 1.3f);
-            }
+        if (shifting)
+        {
+            Wheelie += bikeSetting.speedWheelie * Time.deltaTime / (speed / 50);
+        }
+        else
+        {
+            Wheelie = Mathf.MoveTowards(Wheelie, 0, (bikeSetting.speedWheelie * 2) * Time.deltaTime * 1.3f);
+        }
 
-            deltaRotation1 = Quaternion.Euler(-Wheelie, 0, flipRotate - transform.localEulerAngles.z + (MotorRotation));
-            deltaRotation2 = Quaternion.Euler(0, 0, flipRotate - transform.localEulerAngles.z);
+        deltaRotation1 = Quaternion.Euler(-Wheelie, 0, flipRotate - transform.localEulerAngles.z + (MotorRotation));
+        deltaRotation2 = Quaternion.Euler(0, 0, flipRotate - transform.localEulerAngles.z);
 
-            myRigidbody.MoveRotation(myRigidbody.rotation * deltaRotation2);
-            bikeSetting.MainBody.localRotation = deltaRotation1;
+        myRigidbody.MoveRotation(myRigidbody.rotation * deltaRotation2);
+
+        if (speed > 15f)
+            ManageBikeTurn();
+        else 
+            ManageBikeSteerAngle();
     }
 
     void FixedUpdate()
     {
         speed = myRigidbody.velocity.magnitude * 2.7f;
-
         steer = Mathf.MoveTowards(steer, Input.GetAxis("Horizontal"), 0.1f);
         accel = Input.GetAxis("Vertical");
         brake = Input.GetButton("Jump");
@@ -281,8 +282,19 @@ public class MyBikeControll1 : MonoBehaviour
         int currentWheel = 0;
 
         ManageMotorizedWheels(ref rpm, ref motorizedWheels, ref floorContact, ref currentWheel);
-
         ManageTorque();
+    }
+
+    private void ManageBikeTurn()
+    {
+        bikeSetting.MainBody.localRotation = Quaternion.Lerp(bikeSetting.MainBody.localRotation, deltaRotation1, Time.deltaTime);
+        bikeSetting.bikeSteer.localRotation = Quaternion.Lerp(bikeSetting.bikeSteer.localRotation, SteerRotation, Time.deltaTime*2);
+    }
+
+    public void ManageBikeSteerAngle()
+    {
+        bikeSetting.bikeSteer.localRotation = Quaternion.Lerp(bikeSetting.bikeSteer.localRotation, SteerRotation * Quaternion.Euler(0, wheels[0].collider.steerAngle, 0), Time.deltaTime);
+        bikeSetting.MainBody.localRotation = Quaternion.Lerp(bikeSetting.MainBody.localRotation, Quaternion.identity, Time.deltaTime);
     }
 
     private void ManageMotorizedWheels(ref float rpm, ref int motorizedWheels, ref bool floorContact, ref int currentWheel)

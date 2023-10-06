@@ -119,6 +119,7 @@ public class MyBikeControll1 : MonoBehaviour
     public float steerAmount = 0.0f;
 
     private WheelComponent[] wheels;
+    private Vector2 inputMovement;
 
     private class WheelComponent
     {
@@ -197,6 +198,11 @@ public class MyBikeControll1 : MonoBehaviour
         }
     }
 
+    public void DoMove(Vector2 movement)
+    {
+        inputMovement = movement;
+    }
+
     public void ShiftUp()
     {
         if (currentGear < bikeSetting.gears.Length - 1)
@@ -241,7 +247,7 @@ public class MyBikeControll1 : MonoBehaviour
     }
 
     void Update()
-    {     
+    {
         steer2 = Mathf.LerpAngle(steer2, steer * -bikeSetting.maxSteerAngle, Time.deltaTime * 10.0f);
         MotorRotation = Mathf.LerpAngle(MotorRotation, steer2 * bikeSetting.maxTurn * (Mathf.Clamp(speed / Z_Rotation, 0.0f, 1.0f)), Time.deltaTime * 5.0f);
 
@@ -271,9 +277,9 @@ public class MyBikeControll1 : MonoBehaviour
     void FixedUpdate()
     {
         speed = myRigidbody.velocity.magnitude * 2.7f;
-        steer = Mathf.MoveTowards(steer, Input.GetAxis("Horizontal"), 0.1f);
-        accel = Input.GetAxis("Vertical");
-        brake = Input.GetButton("Jump");
+        accel = inputMovement.y;
+        steer = inputMovement.x;
+
         ManageGears();
 
         float rpm = 0.0f;

@@ -587,6 +587,7 @@ GameObject:
   - component: {fileID: 4964045922259436101}
   - component: {fileID: 4964045922259436098}
   - component: {fileID: 8211733618139370724}
+  - component: {fileID: 2216351645162460545}
   m_Layer: 0
   m_Name: MyMotorBikeTest
   m_TagString: Untagged
@@ -639,13 +640,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 473001ae7358fb144b109806e6acea38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeControl: 0
   bikeWheels:
     wheels:
-      wheelFront: {fileID: 0}
-      wheelBack: {fileID: 0}
-      AxleFront: {fileID: 0}
-      AxleBack: {fileID: 0}
+      wheelFront: {fileID: 4964045922251499043}
+      wheelBack: {fileID: 4964045923091431095}
+      AxleFront: {fileID: 4964045922829388393}
+      AxleBack: {fileID: 4964045923091431095}
     setting:
       Radius: 0.3
       Weight: 1000
@@ -653,8 +653,8 @@ MonoBehaviour:
   bikeSetting:
     showNormalGizmos: 0
     cameraSwitchView: []
-    MainBody: {fileID: 0}
-    bikeSteer: {fileID: 0}
+    MainBody: {fileID: 4964045923357611691}
+    bikeSteer: {fileID: 4964045921506035540}
     maxWheelie: 40
     speedWheelie: 30
     slipBrake: 3
@@ -678,10 +678,9 @@ MonoBehaviour:
     - 4.5
     - 3
     - 2.5
-    LimitBackwardSpeed: 60
+    LimitBackwardSpeed: 5
     LimitForwardSpeed: 220
   grounded: 1
-  crash: 0
   steer: 0
   brake: 0
   Backward: 0
@@ -689,14 +688,24 @@ MonoBehaviour:
   Z_Rotation: 5
   curTorque: 100
   powerShift: 100
-  shift: 0
   speed: 0
   currentGear: 0
   NeutralGear: 1
-  motorRPM: 0
   accelFwd: 0
   accelBack: 0
   steerAmount: 0
+--- !u!114 &2216351645162460545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4964045922259436126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bbd588136e0b734cafb7bff7ff79b74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4964045922271248025
 GameObject:
   m_ObjectHideFlags: 0

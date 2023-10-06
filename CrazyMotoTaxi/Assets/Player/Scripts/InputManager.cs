@@ -6,11 +6,11 @@ public class InputManager : MonoBehaviour
 {
     PlayerInput inputMap;
     PlayerInput.ActionMapActions playerControls;
-    BikeMovement movement;
+    MyBikeControll1 movement;
 
     private void Awake()
     {
-        movement = GetComponent<BikeMovement>();
+        movement = GetComponent<MyBikeControll1>();
 
         inputMap = new PlayerInput();
         playerControls = inputMap.ActionMap;

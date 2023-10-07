@@ -10,7 +10,7 @@ public class BikeMovement : MonoBehaviour
 
     [Header ( "Steer ")]
     //[SerializeField, MustBeAssigned] Transform steer;
-    public float maxSteerAngle = 30.0f, currentSteerAngle =0f;
+    public float maxSteerAngle = 30.0f, currentSteerAngle =0f, clampedSteerAngle;
 
     [Header("BikeBody")]
     [SerializeField, MustBeAssigned] Transform bike;
@@ -26,8 +26,6 @@ public class BikeMovement : MonoBehaviour
     public void DoMove(Vector2 input)
     {
         inputMovement = input;
-
-       
     }
 
     private void FixedUpdate()
@@ -39,18 +37,18 @@ public class BikeMovement : MonoBehaviour
         else
             Decelerate();
 
-
-
         if (inputMovement.x != 0f)
             Turn();
-        Debug.DrawRay(transform.position, transform.forward, Color.blue);
 
-        currentSteerAngle = Mathf.Clamp(currentSteerAngle, body.localEulerAngles.y - maxSteerAngle, body.localEulerAngles.y + maxSteerAngle);
-        transform.localRotation = Quaternion.Euler(0, currentSteerAngle, 0);
+        // Clamp the angle first
+       clampedSteerAngle = Mathf.Clamp(currentSteerAngle, body.localRotation.eulerAngles.y - maxSteerAngle, body.localEulerAngles.y + maxSteerAngle);
+        // Interpolate between the current angle and the clamped angle
+        currentSteerAngle = Mathf.LerpAngle(currentSteerAngle, clampedSteerAngle, Time.fixedDeltaTime);
+
+        transform.localEulerAngles = new Vector3(0, currentSteerAngle, 0);
 
         transform.position += transform.forward * currentSpeed * Time.deltaTime;
     }
-
     public void Accelerate()
     {
         currentSpeed += accelerationSpeed * Time.deltaTime;
@@ -78,7 +76,7 @@ public class BikeMovement : MonoBehaviour
         if(currentSpeed < 1)
         {
             ReturnBodyToTheirOriginalPos();
-            currentSteerAngle += inputMovement.x * Time.deltaTime*50f;
+            currentSteerAngle += inputMovement.x;
 
         }
        /* else
@@ -89,7 +87,6 @@ public class BikeMovement : MonoBehaviour
             if(currentSpeed!=0)
                 transform.localRotation = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y, -currentBikeInclination);
         }*/
-
     }
 
     public void ReturnSteerToTheirOriginalPos()
@@ -110,5 +107,11 @@ public class BikeMovement : MonoBehaviour
     {
         ReturnSteerToTheirOriginalPos();
         ReturnBodyToTheirOriginalPos();
+    }
+
+    public float ReturnAngleWithNegativeFormat(float angle)
+    {
+        if (angle > 180) return angle -= 360;
+        else return angle;
     }
 }

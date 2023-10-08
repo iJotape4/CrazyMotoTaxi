@@ -1,0 +1,11 @@
+# Created by Kenney (www.kenney.nl)
+
+newmtl brick
+Kd 0.9176471 0.8980392 0.8117647
+
+newmtl roof
+Kd 0.2666667 0.2666667 0.2666667
+
+newmtl glass
+Kd 0.6117647 0.8313726 0.8862745
+

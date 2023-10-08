@@ -1,0 +1,8 @@
+# Created by Kenney (www.kenney.nl)
+
+newmtl metal
+Kd 0.8823529 0.8862745 0.9019608
+
+newmtl roof
+Kd 0.2666667 0.2666667 0.2666667
+

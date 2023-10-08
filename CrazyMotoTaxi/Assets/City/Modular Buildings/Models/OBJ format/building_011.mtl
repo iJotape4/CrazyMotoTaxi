@@ -1,0 +1,8 @@
+# Created by Kenney (www.kenney.nl)
+
+newmtl green
+Kd 0.5411765 0.7098039 0.2862745
+
+newmtl brickDark
+Kd 0.8 0.7803922 0.7058824
+

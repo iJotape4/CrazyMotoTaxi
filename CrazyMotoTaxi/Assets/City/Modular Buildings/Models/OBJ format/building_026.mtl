@@ -1,0 +1,11 @@
+# Created by Kenney (www.kenney.nl)
+
+newmtl brickDark
+Kd 0.8 0.7803922 0.7058824
+
+newmtl brick
+Kd 0.9176471 0.8980392 0.8117647
+
+newmtl glass
+Kd 0.6117647 0.8313726 0.8862745
+

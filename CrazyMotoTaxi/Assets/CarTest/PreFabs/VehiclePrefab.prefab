@@ -144,6 +144,8 @@ GameObject:
   - component: {fileID: 4217498140849413751}
   - component: {fileID: 6405638540690467935}
   - component: {fileID: 2125752397983462808}
+  - component: {fileID: 1189356067}
+  - component: {fileID: 1189356068}
   m_Layer: 0
   m_Name: VehiclePrefab
   m_TagString: Untagged
@@ -272,6 +274,35 @@ MonoBehaviour:
   position: -1
   direction: 0
   tooltip: 
+--- !u!114 &1189356067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5017867959347044482}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f16e0e2178d16274e8dec0a02fd623b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1189356068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5017867959347044482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7d26eea836b3294cb352b62519fc554, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  brakeDistance: 4
+  brakeDistanceCalcMultiplier: 0.32
+  yOffset: {x: 0, y: 0.5, z: 0}
+  allowedDistance: 1
+  customBrakeTorque: 1000
 --- !u!1 &5017867959462388829
 GameObject:
   m_ObjectHideFlags: 0

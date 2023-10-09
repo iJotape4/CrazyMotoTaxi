@@ -17,6 +17,14 @@ namespace NPC.Vehicle
                 wcol.brakeTorque = brakeTorque;
             else
                 wcol.brakeTorque = 0;
-       }
+       } 
+        
+        public void ApplyBrakes(bool brake, float _brakeTorque)
+        {
+            if (brake) 
+                wcol.brakeTorque = _brakeTorque;
+            else
+                wcol.brakeTorque = 0;
+        }
     }
 }

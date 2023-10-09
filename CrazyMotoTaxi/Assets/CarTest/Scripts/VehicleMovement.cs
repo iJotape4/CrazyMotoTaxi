@@ -16,7 +16,7 @@ namespace NPC.Vehicle
             steeringWheels = GetComponentsInChildren<WheelSteerable>();
         }
 
-        void FixedUpdate()
+        /*void FixedUpdate()
         {
          //TODO : Remove Player input
             float throttle = Input.GetAxis("Vertical");
@@ -25,9 +25,9 @@ namespace NPC.Vehicle
             ApplyAcceleration(throttle);
             ApplySteering(steering);
             ApplyBrakes();
-        }
+        }*/
 
-        void ApplyAcceleration(float throttle)
+        public void ApplyAcceleration(float throttle)
         {
             foreach (WheelAccelerable wheel in driveWheels)
             {
@@ -35,7 +35,7 @@ namespace NPC.Vehicle
             }
         }
 
-        void ApplySteering(float steering)
+        public void ApplySteering(float steering)
         {
             foreach (WheelSteerable wheel in steeringWheels)
             {
@@ -43,23 +43,20 @@ namespace NPC.Vehicle
             }
         }
 
-        void ApplyBrakes()
+        public void ApplyBrakes(bool applyBrakes)
         {
-            //TODO : Remove Player input
-            if (Input.GetKey(KeyCode.Space))
+            foreach (WheelAccelerable wheel in driveWheels)
             {
-                foreach (WheelAccelerable wheel in driveWheels)
-                {
-                    wheel.ApplyBrakes(true);
-                }
-            }
-            else
+                wheel.ApplyBrakes(applyBrakes);
+            }          
+        }
+        
+        public void ApplyBrakes(bool applyBrakes , float brakeTorque)
+        {
+            foreach (WheelAccelerable wheel in driveWheels)
             {
-                foreach (WheelAccelerable wheel in driveWheels)
-                {
-                    wheel.ApplyBrakes(false);
-                }
-            }
+                wheel.ApplyBrakes(applyBrakes, brakeTorque);
+            }          
         }
     }
 }

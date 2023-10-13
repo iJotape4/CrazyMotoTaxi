@@ -35,9 +35,9 @@ public class PathFinder : MonoBehaviour
         currentWayPoint = 0;
         allowMovement = true;
         move = true;
-        //GetComponent<Rigidbody>().centerOfMass = Vector3.zero;
         CalculateNavMashLayerBite();
         PathProgress();
+        //GetComponent<Rigidbody>().centerOfMass = Vector3.zero;
     }
 
     void FixedUpdate()

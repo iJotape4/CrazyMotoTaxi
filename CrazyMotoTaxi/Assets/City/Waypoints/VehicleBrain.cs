@@ -13,7 +13,7 @@ public class VehicleBrain : MonoBehaviour
     private List<Vector3> waypoints;
     private int currentWaypointIndex = 0;
     [SerializeField] float allowedDistance = 1.0f;
-    private bool destinationReached =false;
+    private bool destinationReached = false;
 
     [Header("Physics related components")]
     [SerializeField] VehicleMovement movement;
@@ -21,10 +21,11 @@ public class VehicleBrain : MonoBehaviour
 
     [Header("Braking")]
     [SerializeField, ReadOnly] bool isblockedFront;
-    float brakeDistance= 4f;
+    float brakeDistance = 4f;
     [SerializeField, Range(0.01f, 1f)] float brakeDistanceCalcMultiplier = 0.32f;
 
     Vector3 frontDirection;
+    [SerializeField] Transform carFront;
     private void Awake()
     {
         pathFinder = GetComponent<PathFinder>();
@@ -32,7 +33,8 @@ public class VehicleBrain : MonoBehaviour
         movement = GetComponent<VehicleMovement>();
         pathFinder.e_waypointsGenerated += SetNewDestination;
         pathFinder.e_nextWaypoint += SetDestinationToNextWaypoint;
-       // rb = GetComponent<Rigidbody>();
+        pathFinder.e_positionBugged += FixPosition;
+        // rb = GetComponent<Rigidbody>();
     }
 
     private void Update()
@@ -46,11 +48,16 @@ public class VehicleBrain : MonoBehaviour
 
     private void SetDestinationToNextWaypoint(Vector3 nextWaypoint)
     {
-        navMeshAgent.SetDestination(nextWaypoint);       
+        navMeshAgent.SetDestination(nextWaypoint);
     }
     public void SetNewDestination()
     {
         destinationReached = false;
+    }
+
+    public void FixPosition()
+    {
+        navMeshAgent.SetDestination(-carFront.position);
     }
 
 

@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1280533293, guid: 91239fba5a3ff0843b0991ee0cb84bf6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.65
+      objectReference: {fileID: 0}
     - target: {fileID: 3586745400906007122, guid: 91239fba5a3ff0843b0991ee0cb84bf6,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -45,7 +49,7 @@ PrefabInstance:
     - target: {fileID: 5017867959347044482, guid: 91239fba5a3ff0843b0991ee0cb84bf6,
         type: 3}
       propertyPath: m_Name
-      value: MetrolineaVariant
+      value: Vehicle_Metrolinea Variant
       objectReference: {fileID: 0}
     - target: {fileID: 5017867959347044483, guid: 91239fba5a3ff0843b0991ee0cb84bf6,
         type: 3}

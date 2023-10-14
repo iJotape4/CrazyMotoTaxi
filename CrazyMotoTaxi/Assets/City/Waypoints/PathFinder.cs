@@ -28,11 +28,12 @@ public class PathFinder : MonoBehaviour
     private bool allowMovement;
     private int navMeshLayerBite;
     [SerializeField] public List<Vector3> waypoints = new List<Vector3>();
-    private int fails;
+    private int pathFails, destinationFails;
 
     [SerializeField] float offset;
-    public UnityAction e_waypointsGenerated;
+    public UnityAction e_waypointsGenerated, e_positionBugged;
     public UnityAction<Vector3> e_nextWaypoint;
+    
 
     void Awake()
     {
@@ -42,7 +43,7 @@ public class PathFinder : MonoBehaviour
     {
         waypoints.Clear();
         currentWayPoint = 0;
-        fails = 0;
+        pathFails = 0;
         CustomDestination = RandomNavMeshPoint.GetRandomNavMeshPoint();
     }
 
@@ -59,8 +60,13 @@ public class PathFinder : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (fails >= 100)
+        if (pathFails >= 100)
+        {           
             SetNewDestination();
+            destinationFails++;
+            if(destinationFails>=2)
+                e_positionBugged?.Invoke();
+        }
        PathProgress();
     }
 
@@ -120,8 +126,7 @@ public class PathFinder : MonoBehaviour
         {
             if (currentWayPoint > 1 && waypoints.Count > 30)
             {
-                waypoints.RemoveAt(0);
-                currentWayPoint--;
+                SetNewDestination();
             }
         }
     }
@@ -156,7 +161,7 @@ public class PathFinder : MonoBehaviour
                 {
                     waypoints.AddRange(path.corners.ToList());
                     e_waypointsGenerated?.Invoke();
-                    fails = 0;
+                    pathFails = 0;
                     Debug("Random Path generated successfully", false);
                 }
                 else
@@ -165,20 +170,20 @@ public class PathFinder : MonoBehaviour
                     {
                         waypoints.AddRange(path.corners.ToList());
                         e_waypointsGenerated?.Invoke();
-                        fails = 0;
+                        pathFails = 0;
                         Debug("Random Path generated successfully", false);
                     }
                     else
                     {
                         Debug("Failed to generate a random path. Waypoints are outside the AIFOV. Generating a new one", false);
-                        fails++;
+                        pathFails++;
                     }
                 }
             }
             else
             {
                 Debug("Failed to generate a random path. Invalid Path. Generating a new one", false);
-                fails++;
+                pathFails++;
             }
         }
     }
@@ -200,6 +205,7 @@ public class PathFinder : MonoBehaviour
             Calculate(destination, sourcePostion, direction, navMeshLayerBite);
         }
 
+
         void Calculate(Vector3 destination, Vector3 sourcePostion, Vector3 direction, int NavMeshAreaBite)
         {
             if (NavMesh.SamplePosition(destination, out NavMeshHit hit, 150, NavMeshAreaBite) &&
@@ -210,7 +216,7 @@ public class PathFinder : MonoBehaviour
                     waypoints.AddRange(path.corners.ToList());
                     CalculateOffset();
                     e_waypointsGenerated?.Invoke();
-                    fails = 0;
+                    pathFails = 0;
                     Debug("Custom Path generated successfully", false);
                 }
                 else
@@ -220,20 +226,20 @@ public class PathFinder : MonoBehaviour
                         waypoints.AddRange(path.corners.ToList());
                         CalculateOffset();
                         e_waypointsGenerated?.Invoke();
-                        fails = 0;
+                        pathFails = 0;
                         Debug("Custom Path generated successfully", false);
                     }
                     else
                     {
                         Debug("Failed to generate a Custom path. Waypoints are outside the AIFOV. Generating a new one", false);
-                        fails++;
+                        pathFails++;
                     }
                 }
             }
             else
             {
                 Debug("Failed to generate a Custom path. Invalid Path. Generating a new one", false);
-                fails++;
+                pathFails++;
             }
         }
     }

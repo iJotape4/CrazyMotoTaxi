@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 
 public class PathFinder : MonoBehaviour
 {
@@ -16,33 +17,51 @@ public class PathFinder : MonoBehaviour
     public bool Debugger;
 
     [Header("Destination Parameters")]// Look at the documentation for a detailed explanation
-    public Transform CustomDestination;
+    public Vector3 CustomDestination;
 
     [HideInInspector] public bool move;// Look at the documentation for a detailed explanation
 
     private Vector3 targetPosition = Vector3.zero;
     private int currentWayPoint;
-    private float _AIFOV = 60;
+    [SerializeField] float allowedDistance = 2f;
+    private float _AIFOV = 360;
     private bool allowMovement;
     private int navMeshLayerBite;
     [SerializeField] public List<Vector3> waypoints = new List<Vector3>();
     private int fails;
 
     [SerializeField] float offset;
+    public UnityAction e_waypointsGenerated;
+    public UnityAction<Vector3> e_nextWaypoint;
 
     void Awake()
+    {
+        SetNewDestination();
+    }
+    public void SetNewDestination()
+    {
+        waypoints.Clear();
+        currentWayPoint = 0;
+        fails = 0;
+        CustomDestination = RandomNavMeshPoint.GetRandomNavMeshPoint();
+    }
+
+    private void Start()
     {
         currentWayPoint = 0;
         allowMovement = true;
         move = true;
         CalculateNavMashLayerBite();
-        PathProgress();
+       // PathProgress();
         //GetComponent<Rigidbody>().centerOfMass = Vector3.zero;
     }
 
+
     void FixedUpdate()
     {
-        PathProgress();
+        if (fails >= 100)
+            SetNewDestination();
+       PathProgress();
     }
 
     private void CalculateNavMashLayerBite()
@@ -74,8 +93,11 @@ public class PathFinder : MonoBehaviour
             {
                 targetPosition = waypoints[currentWayPoint];
                 allowMovement = true;
-                if (Vector3.Distance(carFront.position, targetPosition) < 2)
+                if (Vector3.Distance(carFront.position, targetPosition) < allowedDistance)
+                {
                     currentWayPoint++;
+                    e_nextWaypoint?.Invoke(waypoints[currentWayPoint]);
+                }
             }
 
             if (currentWayPoint >= waypoints.Count - 3)
@@ -133,6 +155,8 @@ public class PathFinder : MonoBehaviour
                 if (CheckForAngle(path.corners[1], sourcePostion, direction))
                 {
                     waypoints.AddRange(path.corners.ToList());
+                    e_waypointsGenerated?.Invoke();
+                    fails = 0;
                     Debug("Random Path generated successfully", false);
                 }
                 else
@@ -140,6 +164,8 @@ public class PathFinder : MonoBehaviour
                     if (CheckForAngle(path.corners[2], sourcePostion, direction))
                     {
                         waypoints.AddRange(path.corners.ToList());
+                        e_waypointsGenerated?.Invoke();
+                        fails = 0;
                         Debug("Random Path generated successfully", false);
                     }
                     else
@@ -157,7 +183,7 @@ public class PathFinder : MonoBehaviour
         }
     }
 
-    public void CustomPath(Transform destination) //Creates a path to the Custom destination
+    public void CustomPath(Vector3 destination) //Creates a path to the Custom destination
     {
         NavMeshPath path = new NavMeshPath();
         Vector3 sourcePostion;
@@ -165,13 +191,13 @@ public class PathFinder : MonoBehaviour
         if (waypoints.Count == 0)
         {
             sourcePostion = carFront.position;
-            Calculate(destination.position, sourcePostion, carFront.forward, navMeshLayerBite);
+            Calculate(destination, sourcePostion, carFront.forward, navMeshLayerBite);
         }
         else
         {
             sourcePostion = waypoints[waypoints.Count - 1];
             Vector3 direction = (waypoints[waypoints.Count - 1] - waypoints[waypoints.Count - 2]).normalized;
-            Calculate(destination.position, sourcePostion, direction, navMeshLayerBite);
+            Calculate(destination, sourcePostion, direction, navMeshLayerBite);
         }
 
         void Calculate(Vector3 destination, Vector3 sourcePostion, Vector3 direction, int NavMeshAreaBite)
@@ -183,6 +209,8 @@ public class PathFinder : MonoBehaviour
                 {
                     waypoints.AddRange(path.corners.ToList());
                     CalculateOffset();
+                    e_waypointsGenerated?.Invoke();
+                    fails = 0;
                     Debug("Custom Path generated successfully", false);
                 }
                 else
@@ -191,6 +219,8 @@ public class PathFinder : MonoBehaviour
                     {
                         waypoints.AddRange(path.corners.ToList());
                         CalculateOffset();
+                        e_waypointsGenerated?.Invoke();
+                        fails = 0;
                         Debug("Custom Path generated successfully", false);
                     }
                     else

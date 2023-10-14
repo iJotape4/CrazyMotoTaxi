@@ -30,17 +30,9 @@ public class VehicleBrain : MonoBehaviour
         pathFinder = GetComponent<PathFinder>();
         navMeshAgent = GetComponent<NavMeshAgent>();
         movement = GetComponent<VehicleMovement>();
+        pathFinder.e_waypointsGenerated += SetNewDestination;
+        pathFinder.e_nextWaypoint += SetDestinationToNextWaypoint;
        // rb = GetComponent<Rigidbody>();
-    }
-
-    void Start()
-    {
-        SetNewDestination();
-        if (waypoints != null && waypoints.Count > 0)       
-            SetDestinationToNextWaypoint();      
-        else       
-           Debug.LogWarning("No waypoints assigned.");
-        
     }
 
     private void Update()
@@ -50,35 +42,14 @@ public class VehicleBrain : MonoBehaviour
 
         frontDirection = transform.position + (transform.forward * brakeDistance);
         Debug.DrawLine(transform.position, frontDirection, isblockedFront ? Color.red : Color.green);
-
-
-        // Check if the agent has reached the current waypoint.
-        if (Vector3.Distance( transform.position, waypoints[currentWaypointIndex]) <= allowedDistance)
-        {
-            currentWaypointIndex++;
-
-            if (currentWaypointIndex < waypoints.Count)
-            {
-                SetDestinationToNextWaypoint();
-            }
-            else
-            {
-                // All waypoints reached, you can handle completion logic here.
-                destinationReached = true;
-            }
-        }
     }
 
-    private void SetDestinationToNextWaypoint()
+    private void SetDestinationToNextWaypoint(Vector3 nextWaypoint)
     {
-        if (currentWaypointIndex < waypoints.Count)
-        {
-            navMeshAgent.SetDestination(waypoints[currentWaypointIndex]);
-        }
+        navMeshAgent.SetDestination(nextWaypoint);       
     }
     public void SetNewDestination()
     {
-        waypoints = pathFinder.waypoints;
         destinationReached = false;
     }
 

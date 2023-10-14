@@ -257,8 +257,8 @@ MonoBehaviour:
   NavMeshLayers:
   - AllAreas
   ShowGizmos: 1
-  Debugger: 0
-  CustomDestination: {fileID: 0}
+  Debugger: 1
+  CustomDestination: {x: 0, y: 0, z: 0}
   move: 0
   waypoints: []
   offset: 1
@@ -274,7 +274,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48a3995fb9bd1ee459e9ba6e4b0433fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allowedDistance: 1
+  allowedDistance: 1.5
   movement: {fileID: 0}
   isblockedFront: 0
   brakeDistanceCalcMultiplier: 0.32

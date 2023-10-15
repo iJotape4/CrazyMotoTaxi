@@ -1134,13 +1134,13 @@ GameObject:
   - component: {fileID: 344715311}
   - component: {fileID: 344715313}
   - component: {fileID: 344715312}
-  m_Layer: 7
+  m_Layer: 11
   m_Name: Destination
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &344715311
 Transform:
   m_ObjectHideFlags: 0
@@ -14233,7 +14233,7 @@ GameObject:
   m_Component:
   - component: {fileID: 782928046}
   - component: {fileID: 782928047}
-  m_Layer: 7
+  m_Layer: 11
   m_Name: AreaOfPickUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14297,7 +14297,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5e2a31fc8ea42f4eb8d388416b5b92a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionCollider: {fileID: 782928047}
 --- !u!4 &803742393
 Transform:
   m_ObjectHideFlags: 0
@@ -56876,7 +56875,7 @@ GameObject:
   - component: {fileID: 1635158695}
   - component: {fileID: 1635158697}
   - component: {fileID: 1635158696}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: Detector
   m_TagString: Untagged
   m_Icon: {fileID: 0}

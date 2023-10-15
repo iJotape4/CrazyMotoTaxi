@@ -5,22 +5,19 @@ using UnityEngine;
 
 public class NPCClient : MonoBehaviour
 {
-    private DestinationManager destinationManager;
     private Destination destination;
-    [SerializeField]
-    private Collider detectionCollider;
-
-
-    private void Start()
-    {
-        destinationManager = FindObjectOfType<DestinationManager>();
-    }
-
+    public bool isPickedUP = false;
+    private Animator animator;
 
     [ContextMenu("Asignar destino")]
     public void AsignDestination()
     {
-        destination = destinationManager.AssignRandomDestination();
+        destination = DestinationManager.Instance.AssignRandomDestination();
+    }
+
+    private void Start()
+    {
+        animator = GetComponentInChildren<Animator>();
     }
 
     public void ResetNPC()
@@ -30,8 +27,19 @@ public class NPCClient : MonoBehaviour
 
     public void NPCPickUP()
     {
-        destination.gameObject.SetActive(true);
-        detectionCollider.enabled = false;
+        if (!isPickedUP) 
+        {
+            destination.gameObject.SetActive(true);
+            isPickedUP = true;
 
+            // Play the "Jump" animation.
+            animator.SetTrigger("JumpGT");
+        }
+        
+    }
+
+    public void DeliveredNPC()
+    {
+        animator.SetTrigger("JumpOff");
     }
 }

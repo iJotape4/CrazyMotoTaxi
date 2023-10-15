@@ -2,14 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DestinationManager : MonoBehaviour
+public class DestinationManager : SinglentonParent<DestinationManager>
 {
-    Destination[] destinations;
+    public Destination[] destinations;
 
 
     private void Start()
     {
-        destinations = GetComponentsInChildren<Destination>();
+        foreach (Destination dest in destinations) 
+        {
+            dest.gameObject.SetActive(false);
+        }
     }
 
     public Destination AssignRandomDestination()

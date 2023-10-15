@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class NPCPooler : MonoBehaviour
 {
-    public GameObject npcPrefab; // The NPC prefab you want to pool.
+    public GameObject[] npcPrefabs; // The NPC prefab you want to pool.
  
     public int maxPoolSize = 10; // Maximum number of cards to pool.
 
@@ -49,7 +49,11 @@ public class NPCPooler : MonoBehaviour
 
     private void CreateNewNPC()
     {
-        GameObject npcObj = Instantiate(npcPrefab, transform);
+   
+        // Randomly select an NPC prefab from the array.
+        int randomIndex = Random.Range(0, npcPrefabs.Length);
+
+        GameObject npcObj = Instantiate(npcPrefabs[randomIndex], transform);
         NPCClient npc = npcObj.GetComponent<NPCClient>();
         npc.gameObject.SetActive(false);
 

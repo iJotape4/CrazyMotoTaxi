@@ -5,7 +5,6 @@ using UnityEngine;
 public class Destination : MonoBehaviour
 {
     Transform destinationTransform;
-    DestinationManager destinationManager;
 
     public void DeliveredClient()
     {

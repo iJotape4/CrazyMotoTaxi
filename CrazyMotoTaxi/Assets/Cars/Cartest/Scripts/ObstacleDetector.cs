@@ -20,6 +20,8 @@ public class ObstacleDetector : MonoBehaviour
 
     void Update()
     {
+        if (!agent.isOnNavMesh)
+            return;
         if(Physics.Raycast(transform.position, transform.forward ,brakeDistance,mask))       
             StopNavMeshAgent(true);       
         else       

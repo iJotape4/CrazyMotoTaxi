@@ -234,7 +234,7 @@ NavMeshAgent:
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 0
+  m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 0
   m_Height: 2
@@ -260,7 +260,7 @@ MonoBehaviour:
   Debugger: 1
   CustomDestination: {x: 0, y: 0, z: 0}
   move: 0
-  allowedDistance: 2
+  allowedDistance: 4
   waypoints: []
   offset: 1
 --- !u!114 &1139145092

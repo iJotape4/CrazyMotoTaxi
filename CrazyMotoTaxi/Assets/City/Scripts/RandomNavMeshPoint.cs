@@ -3,10 +3,13 @@ using UnityEngine.AI;
 
 public class RandomNavMeshPoint
 {
-    const float citySize = 2000f;
-    public static Vector3 GetRandomNavMeshPoint(float searchRadius = citySize,int navMeshArea = NavMesh.AllAreas )
+    private static float searchRadius = 2000f;
+    private static int navMeshArea = NavMesh.AllAreas;
+    private static Vector3 center = Vector3.zero;
+
+    public static Vector3 GetRandomNavMeshPoint()
     {
-        Vector3 randomPoint = Random.insideUnitSphere * searchRadius;
+        Vector3 randomPoint = center + Random.insideUnitSphere* searchRadius;
         NavMeshHit hit;
 
         if (NavMesh.SamplePosition(randomPoint, out hit, searchRadius, navMeshArea))
@@ -15,6 +18,25 @@ public class RandomNavMeshPoint
         }
         return Vector3.zero;
     }
+
+    public static Vector3 GetRandomNavMeshPoint(int _navMeshArea)
+    {
+       navMeshArea = _navMeshArea;
+       return GetRandomNavMeshPoint();
+    }
+
+    public static Vector3 GetRandomNavMeshPoint(int _navMeshArea, Vector3 _center)
+    {
+        center = _center;
+        return GetRandomNavMeshPoint(_navMeshArea);
+    }
+
+    public static Vector3 GetRandomNavMeshPoint(int _navMeshArea, Vector3 _center, float _searchRadius)
+    {
+        searchRadius = _searchRadius;
+        return GetRandomNavMeshPoint(_navMeshArea, _center);
+    }
+
 
     public static int GetNavMeshAreaFromName(string navmeshAreaName)
     {

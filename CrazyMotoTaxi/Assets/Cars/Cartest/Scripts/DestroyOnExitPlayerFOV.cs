@@ -1,10 +1,25 @@
+using System.Collections;
 using UnityEngine;
 
 public class DestroyOnExitPlayerFOV : MonoBehaviour
 {
-    private void OnTriggerExit(Collider other)
+    float timer = 5f;
+    Coroutine destroyingCoroutine;
+
+    private void OnBecameInvisible()
     {
-        if(other.tag == "Player")
+        destroyingCoroutine= StartCoroutine(DestroyAfterExitPlayerFOV());
+    }
+
+    private void OnBecameVisible()
+    {
+        if(destroyingCoroutine != null)
+        StopCoroutine(destroyingCoroutine);
+    }
+
+    IEnumerator DestroyAfterExitPlayerFOV()
+    {
+        yield return new WaitForSeconds(timer);
         Destroy(this.transform.root.gameObject);
     }
 }

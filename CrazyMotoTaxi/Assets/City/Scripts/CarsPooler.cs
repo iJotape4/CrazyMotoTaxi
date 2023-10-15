@@ -5,6 +5,7 @@ public class CarsPooler : MonoBehaviour
     [SerializeField] GameObject[] carPrefabs;
     private const string carsPrefabsPath = "Cars";
     [SerializeField] float cityRadius = 100f;
+    private const string navMeshAreaName = "Walkable";
     // Start is called before the first frame update
     void Start()
     {
@@ -15,7 +16,7 @@ public class CarsPooler : MonoBehaviour
    public void InstantiateCar()
    {
         int r = Random.Range(0, carPrefabs.Length);
-        Instantiate(carPrefabs[r], RandomNavMeshPoint.GetRandomNavMeshPoint(cityRadius), Quaternion.identity);
+        Instantiate(carPrefabs[r], RandomNavMeshPoint.GetRandomNavMeshPoint(cityRadius, RandomNavMeshPoint.GetNavMeshAreaFromName(navMeshAreaName)), Quaternion.identity);
 
    }
 }

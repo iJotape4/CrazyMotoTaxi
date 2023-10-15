@@ -1,25 +1,47 @@
+using System.Collections;
 using UnityEngine;
 
 namespace City
 {
-    public class CarsPooler : MonoBehaviour
+    public class CarsPooler : ObjectPooler<CarsPooler>
     {
-        [SerializeField] GameObject[] carPrefabs;
-        private const string carsPrefabsPath = "Cars";
         [SerializeField] float cityRadius = 300f;
-        private const string navMeshAreaName = "Walkable";
-        // Start is called before the first frame update
-        void Start()
+        [SerializeField, Range(2,20)] int maxObjectsAmount =8;
+        [SerializeField, Range(1f,10f)] float poolingTick =5f;
+        protected override string navMeshAreaName { get => "Walkable";}
+        protected override string resourcesPath { get => "Cars"; }
+
+        protected override void Start()
         {
-            carPrefabs = Resources.LoadAll<GameObject>(carsPrefabsPath);
+            objectsPrefabs = Resources.LoadAll<GameObject>(resourcesPath);
+            new GameObject("----- Cars Pooler -------");
+            base.Start();
+            StartCoroutine(PoolerBrain());
         }
 
-       [ContextMenu("InstantiateCar")]
-       public void InstantiateCar()
-       {
-            int r = Random.Range(0, carPrefabs.Length);
-            Instantiate(carPrefabs[r], RandomNavMeshPoint.GetRandomNavMeshPoint(RandomNavMeshPoint.GetNavMeshAreaFromName(navMeshAreaName), PlayerPositionNotifier.playerPosition, cityRadius), Quaternion.identity);
+        protected override GameObject InstantiateObjectFromList()
+        {
+            int r = Random.Range(0, objectsPrefabs.Length);
+            GameObject go = Instantiate(objectsPrefabs[r], GetRandomPosition(), Quaternion.identity, null);
+            return go;             
+        } 
+        
+        IEnumerator PoolerBrain()
+        {
+            while (true)
+            {
+                Debug.Log("routineWorking");
+                int objectsAmount = GetActiveObjectsAmount();
+                Debug.Log(objectsAmount);
+                if (objectsAmount >= maxObjectsAmount)
+                    yield return new WaitForSeconds(poolingTick);
 
-       }
+                else             
+                    for (int i = 0; i < maxObjectsAmount - objectsAmount; i++)
+                        InstantiateObjectInWorld();
+                
+                yield return null;
+            }
+        }
     }
 }

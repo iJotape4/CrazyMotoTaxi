@@ -16,7 +16,7 @@ public class CarsPooler : MonoBehaviour
    public void InstantiateCar()
    {
         int r = Random.Range(0, carPrefabs.Length);
-        Instantiate(carPrefabs[r], RandomNavMeshPoint.GetRandomNavMeshPoint(cityRadius, RandomNavMeshPoint.GetNavMeshAreaFromName(navMeshAreaName)), Quaternion.identity);
+        Instantiate(carPrefabs[r], RandomNavMeshPoint.GetRandomNavMeshPoint(RandomNavMeshPoint.GetNavMeshAreaFromName(navMeshAreaName), Vector3.zero, cityRadius), Quaternion.identity);
 
    }
 }

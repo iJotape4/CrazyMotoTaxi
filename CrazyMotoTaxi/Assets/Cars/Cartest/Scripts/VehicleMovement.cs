@@ -1,8 +1,9 @@
+using System;
 using UnityEngine;
 
 namespace NPC.Vehicle
 {
-    [RequireComponent(typeof(Rigidbody))]
+    //[RequireComponent(typeof(Rigidbody))]
     public class VehicleMovement : MonoBehaviour
     {
         [SerializeField] WheelAccelerable[] driveWheels;
@@ -16,17 +17,6 @@ namespace NPC.Vehicle
             steeringWheels = GetComponentsInChildren<WheelSteerable>();
         }
 
-        /*void FixedUpdate()
-        {
-         //TODO : Remove Player input
-            float throttle = Input.GetAxis("Vertical");
-           float steering = Input.GetAxis("Horizontal");
-
-            ApplyAcceleration(throttle);
-            ApplySteering(steering);
-            ApplyBrakes();
-        }*/
-
         public void ApplyAcceleration(float throttle)
         {
             foreach (WheelAccelerable wheel in driveWheels)
@@ -35,11 +25,19 @@ namespace NPC.Vehicle
             }
         }
 
-        public void ApplySteering(float steering)
+        public void ApplySteering(float steering, bool playerInput)
         {
             foreach (WheelSteerable wheel in steeringWheels)
             {
-                wheel.Steer ( steering );
+                wheel.Steer(steering, true);
+            }
+        }
+
+        public void ApplySteering(float steerAngle)
+        {
+            foreach (WheelSteerable wheel in steeringWheels)
+            {
+                wheel.Steer(steerAngle);
             }
         }
 

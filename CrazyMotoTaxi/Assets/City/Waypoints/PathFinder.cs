@@ -24,7 +24,7 @@ public class PathFinder : MonoBehaviour
     private Vector3 targetPosition = Vector3.zero;
     private int currentWayPoint;
     [SerializeField] float allowedDistance = 2f;
-    private float _AIFOV = 360;
+    private float _AIFOV = 90;
     private bool allowMovement;
     private int navMeshLayerBite;
     [SerializeField] public List<Vector3> waypoints = new List<Vector3>();

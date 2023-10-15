@@ -15,7 +15,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 16
   m_IsActive: 1
 --- !u!4 &1280533293
 Transform:
@@ -67,7 +67,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 16
   m_IsActive: 1
 --- !u!4 &3221906238880498469
 Transform:
@@ -200,7 +200,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 16
   m_IsActive: 1
 --- !u!4 &5017867959347044483
 Transform:
@@ -255,7 +255,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carFront: {fileID: 1280533293}
   NavMeshLayers:
-  - AllAreas
+  - Walkable
   ShowGizmos: 1
   Debugger: 1
   CustomDestination: {x: 0, y: 0, z: 0}
@@ -388,7 +388,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 16
   m_IsActive: 1
 --- !u!4 &5017867959462388830
 Transform:
@@ -420,6 +420,11 @@ PrefabInstance:
         type: 3}
       propertyPath: maxAngle
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7570219656479285008, guid: a402a0a7eab80f946b61bb4aec60a55c,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 8387287600739503962, guid: a402a0a7eab80f946b61bb4aec60a55c,
         type: 3}
@@ -481,6 +486,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wheel Steerable L
       objectReference: {fileID: 0}
+    - target: {fileID: 8387287600739503963, guid: a402a0a7eab80f946b61bb4aec60a55c,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 8387287601239768851, guid: a402a0a7eab80f946b61bb4aec60a55c,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 16
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a402a0a7eab80f946b61bb4aec60a55c, type: 3}
 --- !u!4 &5017867959728666171 stripped
@@ -500,6 +515,11 @@ PrefabInstance:
         type: 3}
       propertyPath: maxAngle
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7570219656479285008, guid: a402a0a7eab80f946b61bb4aec60a55c,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 8387287600739503962, guid: a402a0a7eab80f946b61bb4aec60a55c,
         type: 3}
@@ -561,6 +581,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wheel Steerable R
       objectReference: {fileID: 0}
+    - target: {fileID: 8387287600739503963, guid: a402a0a7eab80f946b61bb4aec60a55c,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 8387287601239768851, guid: a402a0a7eab80f946b61bb4aec60a55c,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 16
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a402a0a7eab80f946b61bb4aec60a55c, type: 3}
 --- !u!4 &3586745400906007122 stripped
@@ -580,6 +610,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Wheel Accelerable R
+      objectReference: {fileID: 0}
+    - target: {fileID: 7750264543060646246, guid: 7179abe37e12b0748a261fcf06887637,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 7750264543060646247, guid: 7179abe37e12b0748a261fcf06887637,
         type: 3}
@@ -636,6 +671,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7750264543650883886, guid: 7179abe37e12b0748a261fcf06887637,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 8567266526150920493, guid: 7179abe37e12b0748a261fcf06887637,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 16
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7179abe37e12b0748a261fcf06887637, type: 3}
 --- !u!4 &3327444175051730437 stripped
@@ -655,6 +700,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Wheel Accelerable L
+      objectReference: {fileID: 0}
+    - target: {fileID: 7750264543060646246, guid: 7179abe37e12b0748a261fcf06887637,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 7750264543060646247, guid: 7179abe37e12b0748a261fcf06887637,
         type: 3}
@@ -710,6 +760,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7750264543650883886, guid: 7179abe37e12b0748a261fcf06887637,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 8567266526150920493, guid: 7179abe37e12b0748a261fcf06887637,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7179abe37e12b0748a261fcf06887637, type: 3}

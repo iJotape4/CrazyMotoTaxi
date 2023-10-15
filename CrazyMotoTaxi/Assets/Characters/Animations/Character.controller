@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1102 &-7768415627256631752
+--- !u!1102 &-9073521297336667515
 AnimatorState:
   serializedVersion: 6
   m_ObjectHideFlags: 1
@@ -27,7 +27,7 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!1102 &-6807910559667593078
+--- !u!1102 &-8083731477393084863
 AnimatorState:
   serializedVersion: 6
   m_ObjectHideFlags: 1
@@ -48,6 +48,33 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: -6996099658168588833, guid: a4975e242204e7941b875490d353a79c,
+    type: 3}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
+--- !u!1102 &-7818805031338392902
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: rig|tomar taxi
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 4792937453798741649, guid: a4975e242204e7941b875490d353a79c,
     type: 3}
   m_Tag: 
   m_SpeedParameter: 
@@ -81,14 +108,14 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!1102 &-5068736417813528420
+--- !u!1102 &-5843307782453110831
 AnimatorState:
   serializedVersion: 6
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: rig|tomar taxi
+  m_Name: rig|moto vespa_ pato derecha_
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -101,21 +128,21 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 4792937453798741649, guid: a4975e242204e7941b875490d353a79c,
+  m_Motion: {fileID: 3429319606715445747, guid: a4975e242204e7941b875490d353a79c,
     type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!1102 &-2073467475025049684
+--- !u!1102 &-1376171998010514742
 AnimatorState:
   serializedVersion: 6
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: rig|moto gt derecha
+  m_Name: rig|moto vespa derecha
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -128,7 +155,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -1093096418003131276, guid: a4975e242204e7941b875490d353a79c,
+  m_Motion: {fileID: 4832004979503957785, guid: a4975e242204e7941b875490d353a79c,
     type: 3}
   m_Tag: 
   m_SpeedParameter: 
@@ -157,6 +184,33 @@ AnimatorController:
     m_IKPass: 0
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
+--- !u!1102 &1406731313012556501
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: rig|ciclo de caminado 0
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 2849471573587476333, guid: a4975e242204e7941b875490d353a79c,
+    type: 3}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!1107 &1988112510408720221
 AnimatorStateMachine:
   serializedVersion: 6
@@ -170,23 +224,32 @@ AnimatorStateMachine:
     m_State: {fileID: -6541930121924711713}
     m_Position: {x: 480, y: 10, z: 0}
   - serializedVersion: 1
-    m_State: {fileID: -2073467475025049684}
-    m_Position: {x: 210, y: 270, z: 0}
+    m_State: {fileID: 1406731313012556501}
+    m_Position: {x: 280, y: 30, z: 0}
   - serializedVersion: 1
-    m_State: {fileID: -7768415627256631752}
-    m_Position: {x: 210, y: 120, z: 0}
+    m_State: {fileID: 6441057048561413005}
+    m_Position: {x: 340, y: 90, z: 0}
   - serializedVersion: 1
-    m_State: {fileID: 3714192884133744554}
-    m_Position: {x: 500, y: 270, z: 0}
+    m_State: {fileID: 5699099605471030698}
+    m_Position: {x: 370, y: 240, z: 0}
   - serializedVersion: 1
-    m_State: {fileID: 4178793068135545832}
-    m_Position: {x: 500, y: 120, z: 0}
+    m_State: {fileID: 5307365454270014067}
+    m_Position: {x: 580, y: 80, z: 0}
   - serializedVersion: 1
-    m_State: {fileID: -6807910559667593078}
-    m_Position: {x: 210, y: 200, z: 0}
+    m_State: {fileID: -9073521297336667515}
+    m_Position: {x: 260, y: 150, z: 0}
   - serializedVersion: 1
-    m_State: {fileID: -5068736417813528420}
-    m_Position: {x: 500, y: 200, z: 0}
+    m_State: {fileID: -1376171998010514742}
+    m_Position: {x: 550, y: 140, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -5843307782453110831}
+    m_Position: {x: 580, y: 260, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -8083731477393084863}
+    m_Position: {x: 190, y: 270, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -7818805031338392902}
+    m_Position: {x: 560, y: 200, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -197,14 +260,14 @@ AnimatorStateMachine:
   m_ExitPosition: {x: 800, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: -6541930121924711713}
---- !u!1102 &3714192884133744554
+--- !u!1102 &5307365454270014067
 AnimatorState:
   serializedVersion: 6
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: rig|moto vespa derecha
+  m_Name: rig|moto gt derecha
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -217,21 +280,21 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 4832004979503957785, guid: a4975e242204e7941b875490d353a79c,
+  m_Motion: {fileID: -1093096418003131276, guid: a4975e242204e7941b875490d353a79c,
     type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!1102 &4178793068135545832
+--- !u!1102 &5699099605471030698
 AnimatorState:
   serializedVersion: 6
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: rig|moto vespa_ pato derecha_
+  m_Name: rig|idle_ 2
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -244,7 +307,34 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 3429319606715445747, guid: a4975e242204e7941b875490d353a79c,
+  m_Motion: {fileID: 1189575424807106315, guid: a4975e242204e7941b875490d353a79c,
+    type: 3}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
+--- !u!1102 &6441057048561413005
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: rig|idle
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 1599155768152908184, guid: a4975e242204e7941b875490d353a79c,
     type: 3}
   m_Tag: 
   m_SpeedParameter: 

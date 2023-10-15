@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class NPCPooler : MonoBehaviour
+public class NPCSpawner : MonoBehaviour
 {
     [SerializeField] GameObject npc;
     private const string navMeshAreaName = "Anden";

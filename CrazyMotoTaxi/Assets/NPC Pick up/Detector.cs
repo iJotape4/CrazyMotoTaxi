@@ -1,8 +1,10 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor.PackageManager;
 using UnityEngine;
+using Sequence = DG.Tweening.Sequence;
 
 public class Detector : MonoBehaviour
 {
@@ -38,9 +40,23 @@ public class Detector : MonoBehaviour
                 isInService = true;
                 client.NPCPickUP();
                 client.transform.SetParent(Seat.transform);
+                AnimateNPCPickup(client, Seat.transform);
                 lastClient = client;
                 
             }
         }
+    }
+
+    private void AnimateNPCPickup(NPCClient client, Transform targetTransform)
+    {
+        // Calculate the jump start and end positions
+        Vector3 startPosition = client.transform.position;
+        Vector3 jumpHeight = Vector3.up * 2.0f; // Adjust the jump height as needed
+        Vector3 endPosition = targetTransform.position;
+
+        // Create the jump animation
+        Sequence jumpSequence = DOTween.Sequence();
+        jumpSequence.Append(client.transform.DOJump(jumpHeight, 1.0f, 1, 1.0f).SetEase(Ease.OutQuad));
+        jumpSequence.Append(client.transform.DOMove(endPosition, 0.5f).SetEase(Ease.InQuad));
     }
 }

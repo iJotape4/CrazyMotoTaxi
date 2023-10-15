@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 6073240521340410680, guid: e7c23f6c49d374949b3bca8910d76812,
         type: 3}
       propertyPath: m_Name
-      value: Wheel Accelerable
+      value: Wheel Accelerable Variant
       objectReference: {fileID: 0}
     - target: {fileID: 6073240521340410681, guid: e7c23f6c49d374949b3bca8910d76812,
         type: 3}
@@ -82,10 +82,9 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7750264543060646246}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d08acb587d31ba54b9245b60f59bf3e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxAngle: 90
-  offset: 0
+  brakeTorque: 500

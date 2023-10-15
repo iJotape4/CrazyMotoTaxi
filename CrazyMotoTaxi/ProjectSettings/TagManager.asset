@@ -12,9 +12,9 @@ TagManager:
   - Water
   - UI
   - Obstacle
-  - Destination
-  - BikeDetector
-  - 
+  - Waypoint
+  - TrafficLight
+  - Car
   - 
   - 
   - 

@@ -27,8 +27,6 @@ namespace NPC.Vehicle
         private void Awake()
         {
             areaMask =1 << NavMesh.GetAreaFromName("Not Walkable") ;
-            Debug.Log(areaMask + " area mask ");
-
         }
 
         void Start()

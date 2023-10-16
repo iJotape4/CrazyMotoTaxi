@@ -770,7 +770,7 @@ GameObject:
   - component: {fileID: 667934052}
   - component: {fileID: 942720656048713462}
   - component: {fileID: 1385978843238102127}
-  m_Layer: 9
+  m_Layer: 13
   m_Name: prueba bike
   m_TagString: Untagged
   m_Icon: {fileID: 0}

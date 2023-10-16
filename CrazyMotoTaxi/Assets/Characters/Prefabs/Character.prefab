@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3336058938005536345}
   - component: {fileID: 1212284522071133269}
+  - component: {fileID: -5684534349264574900}
+  - component: {fileID: 974885270608363605}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -45,6 +47,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5e2a31fc8ea42f4eb8d388416b5b92a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPickedUP: 0
+  areaOfPickup: {fileID: 7164005688057994045}
+--- !u!114 &-5684534349264574900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5099172060933474719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1e409a14f0f16944ad4bcbdda94aada, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!135 &974885270608363605
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5099172060933474719}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 10
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7164005688057994045
 GameObject:
   m_ObjectHideFlags: 0

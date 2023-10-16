@@ -25,10 +25,11 @@ public class Detector : MonoBehaviour
 
             if (destination  != null && isInService) 
             {
-                destination.DeliveredClient();
-                lastClient.DeliveredNPC();
                 lastClient.transform.SetParent(null);
+                lastClient.DeliveredNPC();
+                lastClient.AnimateNPCDelivered(destination.deliverypoint.transform.position);
                 isInService = false;
+                destination.DeliveredClient();
             }
 
             if (client != null && !isInService && !client.isPickedUP) 
@@ -36,23 +37,24 @@ public class Detector : MonoBehaviour
                 isInService = true;
                 client.NPCPickUP();
                 client.transform.SetParent(Seat.transform);
-                AnimateNPCPickup(client, Seat.transform);
-                lastClient = client;
-                
+                client.AnimateNPCPickup();
+                lastClient = client;    
             }
         }
     }
 
-    private void AnimateNPCPickup(NPCClient client, Transform targetTransform)
+    private void OnTriggerEnter(Collider other)
     {
-        // Calculate the jump start and end positions
-        Vector3 startPosition = client.transform.position;
-        Vector3 jumpHeight = Vector3.up * 2.0f; // Adjust the jump height as needed
-        Vector3 endPosition = targetTransform.position;
+        if (rb.velocity.magnitude >= 6f)
+        {
+            NPCClient client = other.GetComponentInParent<NPCClient>();
 
-        // Create the jump animation
-        Sequence jumpSequence = DOTween.Sequence();
-        jumpSequence.Append(client.transform.DOJump(jumpHeight, 1.0f, 1, 1.0f).SetEase(Ease.OutQuad));
-        jumpSequence.Append(client.transform.DOMove(endPosition, 0.5f).SetEase(Ease.InQuad));
+            if (client != null)
+            {
+                client.EvadeBike();
+            }
+            
+        }
     }
+
 }

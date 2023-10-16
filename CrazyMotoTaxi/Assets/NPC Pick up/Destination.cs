@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class Destination : MonoBehaviour
 {
-    Transform destinationTransform;
-
+    public GameObject deliverypoint;
     public void DeliveredClient()
     {
-        GameManager.Instance.Score();
+        GameManager.Instance.StopTaxiFare();
         transform.gameObject.SetActive(false);
     }
 

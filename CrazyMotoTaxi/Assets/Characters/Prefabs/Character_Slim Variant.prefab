@@ -5551,6 +5551,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Character_Slim Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 5099172060933474719, guid: 337735e775aef564f87eebd8d36a035d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 337735e775aef564f87eebd8d36a035d, type: 3}
 --- !u!4 &7697664690902075414 stripped

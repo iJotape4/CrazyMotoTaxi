@@ -28,6 +28,7 @@ public class NPCClient : MonoBehaviour
     public void ResetNPC()
     {
         destination = null;
+        isPickedUP = false;
     }
 
     public void NPCPickUP()

@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.Events;
-using UnityEditor.PackageManager;
+
 
 public class GameManager : SinglentonParent<GameManager>
 {

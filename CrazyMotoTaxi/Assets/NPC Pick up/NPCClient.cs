@@ -11,6 +11,7 @@ public class NPCClient : MonoBehaviour
     public bool isPickedUP = false;
     private Animator animator;
     public GameObject areaOfPickup;
+    public GameObject miniMapGuide;
 
 
 
@@ -53,6 +54,7 @@ public class NPCClient : MonoBehaviour
 
             // Add the payment to the score
             GameManager.Instance.StartTaxiFare(payment);
+            miniMapGuide.SetActive(false);
         }
     }
 

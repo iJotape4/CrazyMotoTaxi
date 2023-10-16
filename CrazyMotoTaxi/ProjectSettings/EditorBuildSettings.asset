@@ -6,6 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/MainMenu/MainMenu.unity
+    guid: 92183612f5dfd604892b226ad9c02bb2
+  - enabled: 1
+    path: Assets/City/Croquis/MainCity.unity
+    guid: cee760f612efeb248b57c2bebfe5dadb
+  - enabled: 1
+    path: Assets/Credits/Credits.unity
+    guid: 20d30989a21e7df479f8b72b238471cb
+  - enabled: 1
+    path: Assets/City/Croquis/CityBuilding.unity
+    guid: 09656501732f013459a28c9d1bbd251e
   m_configObjects: {}

@@ -130,7 +130,7 @@ PrefabInstance:
     - target: {fileID: 170137692096856016, guid: 5a9eb0eae4a07f24eb44a0729bdbeb11,
         type: 3}
       propertyPath: m_Name
-      value: Character_Motorbiker
+      value: Character_Motorbiker Variant
       objectReference: {fileID: 0}
     - target: {fileID: 175069794622542610, guid: 5a9eb0eae4a07f24eb44a0729bdbeb11,
         type: 3}
@@ -2456,6 +2456,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -6.5574126
+      objectReference: {fileID: 0}
+    - target: {fileID: 4420869316957170673, guid: 5a9eb0eae4a07f24eb44a0729bdbeb11,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4445571930550900660, guid: 5a9eb0eae4a07f24eb44a0729bdbeb11,
         type: 3}
@@ -5077,5 +5082,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.0000012806605
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6074635668890204698, guid: 5a9eb0eae4a07f24eb44a0729bdbeb11, type: 3}
+    - {fileID: 8467871818048016387, guid: 5a9eb0eae4a07f24eb44a0729bdbeb11, type: 3}
+    - {fileID: 5267217395063223834, guid: 5a9eb0eae4a07f24eb44a0729bdbeb11, type: 3}
+    - {fileID: 7774129333648252339, guid: 5a9eb0eae4a07f24eb44a0729bdbeb11, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5a9eb0eae4a07f24eb44a0729bdbeb11, type: 3}

@@ -15,8 +15,8 @@ TagManager:
   - Waypoint
   - TrafficLight
   - Car
-  - 
-  - 
+  - Detector
+  - Area
   - 
   - PlayerFOV
   - 

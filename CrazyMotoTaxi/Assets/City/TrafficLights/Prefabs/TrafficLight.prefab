@@ -579,6 +579,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WayDirection (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5317331293969861311, guid: c1fe4f93e67e9ca42b9338f66aa5ec42,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5317331294798140235, guid: c1fe4f93e67e9ca42b9338f66aa5ec42,
         type: 3}
       propertyPath: m_Width
@@ -667,6 +672,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: WayDirection
+      objectReference: {fileID: 0}
+    - target: {fileID: 5317331293969861311, guid: c1fe4f93e67e9ca42b9338f66aa5ec42,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5317331294798140232, guid: c1fe4f93e67e9ca42b9338f66aa5ec42,
         type: 3}

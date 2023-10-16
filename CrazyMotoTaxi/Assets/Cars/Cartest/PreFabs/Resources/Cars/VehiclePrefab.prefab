@@ -326,7 +326,7 @@ MonoBehaviour:
   brakeDistance: 30
   mask:
     serializedVersion: 2
-    m_Bits: 768
+    m_Bits: 8960
 --- !u!114 &2125752397983462808
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,8 +1,4 @@
 using DG.Tweening;
-using System.Collections;
-using System.Collections.Generic;
-using System.Xml.Serialization;
-using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class NPCClient : MonoBehaviour

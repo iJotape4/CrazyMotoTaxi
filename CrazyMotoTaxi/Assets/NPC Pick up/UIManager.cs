@@ -35,7 +35,7 @@ public class UIManager : MonoBehaviour
     {
         // Format the time without decimals
         int timeWithoutDecimals = Mathf.FloorToInt(timeLeft);
-        timeLefText.text = timeWithoutDecimals.ToString();
+        timeLefText.text = "Time left: " + timeWithoutDecimals.ToString();
     }
 
     private void UpdateCurrentFare(float currentFare)

@@ -20,6 +20,6 @@ public class DestroyOnExitPlayerFOV : MonoBehaviour
     IEnumerator DestroyAfterExitPlayerFOV()
     {
         yield return new WaitForSeconds(timer);
-        Destroy(this.transform.root.gameObject);
+        this.transform.root.gameObject.SetActive(false);
     }
 }
